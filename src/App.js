@@ -17,13 +17,6 @@ import PivotGrid, {
 import {data, data2} from './utilities/data';
 import dataFactory from './utilities/dataFactory/pivotGridDataFactory.js';
 
-// const data = ArrayGenerator(1000);
-// console.log("data");
-// console.log(data);
-// const data2 = ArrayGenerator(1000);
-// console.log("data2");
-// console.log(data2);
-
 class App extends React.Component {
   constructor(props) {
     super(props);
