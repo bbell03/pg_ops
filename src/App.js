@@ -14,7 +14,6 @@ import PivotGrid, {
   FieldChooser,
 } from 'devextreme-react/pivot-grid';
 
-import {ArrayGenerator } from './utilities/data_gen_ex.js';
 import {data, data2} from './utilities/data';
 import dataFactory from './utilities/dataFactory/pivotGridDataFactory.js';
 
@@ -347,12 +346,13 @@ const dataSource3 = new PivotGridDataSource({
           console.log(data1[index].price);
           result.push({
             ...data,
-            price: Math.round(data.price - data1[index].price)
+            price: Math.round(data.price - data2[index].price)
           });  
         });
 
+        // let diff = dataFactory(ds1, ds2);
         resolve(result);
-        // let diff_obj = dataFactory(ds1, ds2);
+
       });
     }
   })
