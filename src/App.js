@@ -20,29 +20,31 @@ import dataFactory from './utilities/dataFactory/pivotGridDataFactory.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   pg1 : dataSource,
-    //   pg2: dataSource,
-    //   pg3: dataSource3
-    // };
+    this.state = {
+       pg1 : dataSource,
+       pg2: dataSource2,
+       pg3: dataSource3
+     };
     this.pivotGrid1 = React.createRef();
     this.pivotGrid2 = React.createRef();
     this.pivotGrid3 = React.createRef();
+    this.pivots = [this.pivotGrid1, this.pivotGrid2, this.pivotGrid3];
     this.chart = React.createRef();
-    this.onOptioning = this.onOptioning.bind(this);
+    this.pivotReady = this.pivotReady.bind(this);
   }
 
-  async onOptioning(e) {
-    // if (this.state.pg1 != {}) console.log(this.state.pg1);
-    // this.state.pg3 = dataFactory(this.state.pg1, this.state.pg2);
-    // console.log('result_dataObj');
-    // console.log(this.state.pg3);
-
-    // if (e.element.id == 'pivotgrid1') {
-    //   let topTableState = this.state.pivotGrid1.dataSource.state();
-    //   console.log(topTableState);
-    // }
-    // return;
+  pivotReady(e) {
+    const stateEtalon = e.component.getDataSource().state();
+    this.pivots
+      .map((pivotRef) => pivotRef.current.instance)
+      .forEach((pivot) => {
+        if (pivot !== e.component) {
+          const pivotState = pivot.getDataSource().state();
+          if (JSON.stringify(pivotState) !== JSON.stringify(stateEtalon))
+            pivot.getDataSource().state(stateEtalon);
+        }
+      });
+    
   }
 
   componentDidMount() {
@@ -51,11 +53,24 @@ class App extends React.Component {
       alternateDataFields: false
     });
 
-    // this.state.pg1 = this.pivotGrid1.current.dataSource;
+    let pg_data = this.state.pg1;
+    console.log("pg1")
+    console.log(pg_data);
+
+    let pg2_data = this.state.pg2;
+    console.log("pg2")
+    console.log(pg2_data);
+
+    let pg3_data = this.state.pg3;
+    console.log("pg3")
+    console.log(pg3_data);
+
+    let test_diff = dataFactory(pg_data, pg2_data);
+    console.log("test diff with datafactory");
+    console.log(test_diff);
    
     // if (this.state.pg3 != {}) {
     //   console.log("state set");
-    //   this.onOptioning();
     // }
     // console.log(this.pivotGrid1.current.instance.getDataSource());
     // this.pivotGrid.bindChart(this.chart, {
@@ -79,8 +94,8 @@ class App extends React.Component {
         </Chart>
         <PivotGrid
           id="pivotgrid1"
-          dataSource={dataSource}
-          onOptionChanged={this.onOptioning()}
+          dataSource={this.state.pg1}
+          onContentReady={this.pivotReady}
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
@@ -94,7 +109,8 @@ class App extends React.Component {
         </PivotGrid>
         <PivotGrid
           id="pivotgrid2"
-          dataSource={dataSource2}
+          dataSource={this.state.pg2}
+          onContentReady={this.pivotReady}
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
@@ -108,7 +124,8 @@ class App extends React.Component {
         </PivotGrid>
         <PivotGrid
           id="pivotgrid3"
-          dataSource={dataSource3}
+          dataSource={this.state.pg3}
+          onContentReady={this.pivotReady}
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
@@ -335,8 +352,8 @@ const dataSource3 = new PivotGridDataSource({
 
         var result = [];
         data1.forEach(function (data, index) {
-          console.log(data.price);
-          console.log(data1[index].price);
+          //console.log(data.price);
+          // console.log(data1[index].price);
           result.push({
             ...data,
             price: Math.round(data.price - data2[index].price)

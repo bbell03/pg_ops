@@ -6,19 +6,21 @@ import {assembleActiveFields, appendFields, getTableRecord} from './RecordsAndFi
 
 //REMOVE UNNECESSARY PARAMS AND RETURN VALUES
 export default function dataFactory(topDatObj, middleDatObj) {
-    console.log('topDatObj:');
-    console.log(topDatObj);
+    // console.log('topDatObj:');
+    // console.log(topDatObj);
 
-    console.log('middleDatObj');
-    console.log(middleDatObj);
+    // console.log('middleDatObj');
+    // console.log(middleDatObj);
 
     //retrieves data fields
+    // console.log("fields before assembly");
+    // console.log(topDatObj._fields);
     let Fields1 = assembleActiveFields(topDatObj._fields);
-    console.log('assembledFields');
-    console.log(Fields1);
+    // console.log('assembledFields');
+    // console.log(Fields1);
     let Fields2 = assembleActiveFields(middleDatObj._fields);
-    console.log('assembledFields2');
-    console.log(Fields2);
+    // console.log('assembledFields2');
+    // console.log(Fields2);
     //make step to continuity check fields
     // check all fields and return flagged field list of fields unique to top or middle
     let valueFields1 = getFieldExpansion(topDatObj._data)
@@ -66,9 +68,19 @@ export default function dataFactory(topDatObj, middleDatObj) {
 }
 
 function getFieldExpansion(data) {
+    // console.log("in getFieldExpansion");
+    // console.log(data);
+    // console.log(JSON.stringify(data));
+    // console.log(typeof(data));
+    // console.log(data.columns[0].value);
+    // console.log(data.rows);
     let rowOptions = data.rows.map(x => appendFields(x));
+    // console.log("rowOptions");
+    // console.log(rowOptions);
     let colOptions = data.columns.map (y => appendFields(y));
     let expandedFields = {'rows': rowOptions, 'columns': colOptions};
+    // console.log("expanded fields");
+    // console.log(expandedFields);
     return expandedFields;
 }
 
@@ -93,9 +105,9 @@ function cleanValueField(Obj, valueField) {
 }
 
 function parseUniqueFields(recordIndex1, recordIndex2) {
-    console.log('inUniqueFields');
-    console.log(recordIndex1);
-    console.log(recordIndex2);
+    // console.log('inUniqueFields');
+    // console.log(recordIndex1);
+    // console.log(recordIndex2);
     let uniqueFields = [];
     let commonFields = [];
 

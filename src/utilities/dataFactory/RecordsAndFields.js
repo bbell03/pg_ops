@@ -1,12 +1,16 @@
 import {assembleTableRecord} from './RecordsHelpers.js';
 
 export function appendFields(O) {
+    console.log("field active");
+    console.log(O);
     if (O.children) {return [O.value, O.index, O.children.map(child => appendFields(child))]}
     else {return [O.value, O.index]}
 }
 
 //review
 export function assembleActiveFields(fields) {
+    // console.log("fields");
+    // console.log(fields);
     let fObj = {};
     let dimen = ['row', 'column'];
     let activeDataFields = {};
@@ -20,12 +24,17 @@ export function assembleActiveFields(fields) {
     fObj[dimen[0]] = jsonRef1;
     fObj[dimen[1]] = jsonRef2;
     activeDataFields = jsonRef3;
+    // console.log("empty field obj");
+    // console.log(fObj);
+    // console.log("activeDataFields");
+    // console.log(activeDataFields);
 
     // console.log('fields in assemble fields');
     // console.log(fields);
     fields.forEach(field => {
+        // console.log("each field"); 
         // console.log(field);
-        if (field.areaIndex >= 0) {
+        // if (field.areaIndex >= 0) {
             if (field.area == "data") {
                 // console.log('print data field');
                 // console.log(field);
@@ -37,7 +46,7 @@ export function assembleActiveFields(fields) {
             else if (field.area == dimen[1]) {
                 reference.forEach(r => {fObj[dimen[1]][r].push(field[r]);})
             }
-        }
+        // }
     });
 
     return [fObj, activeDataFields];
