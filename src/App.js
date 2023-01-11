@@ -31,6 +31,7 @@ class App extends React.Component {
     this.pivots = [this.pivotGrid1, this.pivotGrid2, this.pivotGrid3];
     this.chart = React.createRef();
     this.pivotReady = this.pivotReady.bind(this);
+    this.optionChanged = this.optionChanged.bind(this);
   }
 
   pivotReady(e) {
@@ -45,6 +46,11 @@ class App extends React.Component {
         }
       });
     
+  }
+
+  optionChanged(e) {
+    console.log("option changed: " + e.id);
+    console.log(e.current.instance.getDataSource());
   }
 
   componentDidMount() {
@@ -65,7 +71,17 @@ class App extends React.Component {
     console.log("pg3")
     console.log(pg3_data);
 
-    let test_diff = dataFactory(pg_data, pg2_data);
+    console.log("pg1 ref.current.instance.getDataSource()")
+    console.log(this.pivotGrid1.current.instance.getDataSource());
+
+    console.log("pg2 ref.current.instance.getDataSource()")
+    console.log(this.pivotGrid2.current.instance.getDataSource());
+
+    console.log("pg3 ref.current.instance.getDataSource()")
+    console.log(this.pivotGrid3.current.instance.getDataSource());
+
+    let test_diff = dataFactory(this.pivotGrid1.current.instance.getDataSource(),
+                                this.pivotGrid2.current.instance.getDataSource());
     console.log("test diff with datafactory");
     console.log(test_diff);
    
@@ -96,6 +112,7 @@ class App extends React.Component {
           id="pivotgrid1"
           dataSource={this.state.pg1}
           onContentReady={this.pivotReady}
+          onOptionChanged={this.optionChanged}
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
@@ -111,6 +128,7 @@ class App extends React.Component {
           id="pivotgrid2"
           dataSource={this.state.pg2}
           onContentReady={this.pivotReady}
+          onOptionChanged={this.optionChanged}
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
@@ -126,6 +144,7 @@ class App extends React.Component {
           id="pivotgrid3"
           dataSource={this.state.pg3}
           onContentReady={this.pivotReady}
+          onOptionChanged={this.optionChanged}
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}

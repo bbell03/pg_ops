@@ -13,11 +13,14 @@ export default function dataFactory(topDatObj, middleDatObj) {
     // console.log(middleDatObj);
 
     //retrieves data fields
-    // console.log("fields before assembly");
-    // console.log(topDatObj._fields);
+    console.log("top fields before assembly");
+    console.log(topDatObj._fields);
     let Fields1 = assembleActiveFields(topDatObj._fields);
     // console.log('assembledFields');
     // console.log(Fields1);
+
+    console.log("mid fields before assembly")
+    console.log(middleDatObj._fields);
     let Fields2 = assembleActiveFields(middleDatObj._fields);
     // console.log('assembledFields2');
     // console.log(Fields2);
