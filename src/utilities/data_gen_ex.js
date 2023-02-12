@@ -10,7 +10,7 @@
 // });
 let types = ['fruits', 'vegetables'];
 let vegetable = ['lettuce', 'kale', 'carrot'];
-let fruit = ['apple', 'strawberry', 'banana'];
+let fruit = ['apple', 'banana', 'strawberry'];
 let continents_source = ["Asia", "Africa", "South America", "Europe", "Australia"];
 let continents_target = ["North_America"]
 let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
