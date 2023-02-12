@@ -80,6 +80,11 @@ class App extends React.Component {
     console.log("pg3 ref.current.instance.getDataSource()")
     console.log(this.pivotGrid3.current.instance.getDataSource());
 
+    let columnFieldAreas = this.pivotGrid1.current.instance.getDataSource().getAreaFields('column', true);
+    let rowFieldAreas = this.pivotGrid1.current.instance.getDataSource().getAreaFields('row', true)
+    console.log(columnFieldAreas);
+    console.log(rowFieldAreas);
+
     let test_diff = dataFactory(this.pivotGrid1.current.instance.getDataSource(),
                                 this.pivotGrid2.current.instance.getDataSource());
     console.log("test diff with datafactory");
@@ -360,19 +365,31 @@ const dataSource3 = new PivotGridDataSource({
         // console.log("ds1");
         // console.log(ds1);
         ds1.paginate(false);
+        ds1.sort("month");
 
         var ds2 = dataSource2.createDrillDownDataSource();
         ds2.paginate(false);
+        ds2.sort("month");
+      
 
         var data1 = await ds1.load();
+        console.log("data1: " + JSON.stringify(data1));
+
         // console.log("data1");
         // console.log(data1);
-        var data2 = await ds2.load();
+        let data2 = await ds2.load();
+        // console.log("data2: " + JSON.stringify(data2));
 
-        var result = [];
+        // let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
+        console.log(makeObj(keys));
+        console.log(groupDatByMonth(data1));
+
+        let result = [];
+
+        //how to organize data for parallelism
         data1.forEach(function (data, index) {
-          //console.log(data.price);
-          // console.log(data1[index].price);
+          // console.log("data: " + data);
+          // console.log("index: " + index);
           result.push({
             ...data,
             price: Math.round(data.price - data2[index].price)
@@ -386,6 +403,62 @@ const dataSource3 = new PivotGridDataSource({
     }
   })
 });
+
+let types = ['fruits', 'vegetables'];
+let vegetable = ['lettuce', 'kale', 'carrot'];
+let fruit = ['apple', 'banana', 'strawberry'];
+let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
+//fruits: 0, 1, 2, vegetables: 3, 4, 5
+//test using dev extreme data filters data layer docs
+function groupDatByMonth(data) {
+  let month = 0;
+  let months = [];
+
+  
+  for (let i = 0; i < 12; i++) {
+    let new_month_obj = [];
+    for (let k = 0; k < 12; k++) {
+      let obj_template = makeObj(keys);
+      new_month_obj.push(obj_template);
+    }
+      months.push(new_month_obj);
+  }
+
+  //aggregate on all kinds of thing in same month at the same time`
+  data.forEach(d => {
+    //handle organic later
+    months[d.month]["organic"] = d["organic"];
+    let k = (d.type == fruit) ? (fruit.indexOf(d.name)) : (3 + vegetable.indexOf(d.name));
+    //type specifier for fruit 
+    
+    //type specifier for vegetables
+    keys.forEach(key => {
+      if (key == "organic")
+        months[d.month][k][key] = d[key];
+      if (key == "price")
+        months[d.month][k][key] += d[key];
+      else {
+        if (months[d.month][k][key].length == 0) months[d.month][k][key] = d[key];
+      }
+    });
+  
+  })
+
+  return months;
+}
+
+//separate by type, name for pivot grid, and organic so just do it twice for organic == 1, and organic == 0
+//go back and set key flags for boolean fields such as labels * and obj with keys * n field groups
+//labels * ({}) for each field = n0 * n1 * n2 ... * nk-1 * nk dependent fields | subfields 
+//ie fruits or vegetables
+function makeObj(keys) {
+  let object = {}
+  for (let i = 0; i < keys.length; i++) {
+    if (keys[i] == "organic" || keys[i] == "price") object[keys[i]] = 0;
+    else object[keys[i]] = "";
+  }
+  return object
+}
 
 const currencyFormatter = new Intl.NumberFormat(
   'en-US', {

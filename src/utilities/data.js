@@ -1,4 +1,4 @@
-import {ArrayGenerator} from './data_gen_ex.js';
+import {ArrayGenerator, ArrayGenerator_Month} from './data_gen_ex.js';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -6,9 +6,9 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 function pg_to_sankey(obj) {
 
-    var result = [];
+    let result = [];
 
-    for (var i = 0; i < obj.length; i++) {
+    for (let i = 0; i < obj.length; i++) {
         var new_obj = {source: "", target: "", weight: 0};
         var found = false;
 
@@ -34,23 +34,23 @@ function pg_to_sankey(obj) {
 }
 
 function pg_to_polar(obj) {
-    var new_obj = {};
-    var result = [];
+    let new_obj = {};
+    let result = [];
 
-    for (var i = 0; i < monthNames.length; i++) {
+    for (let i = 0; i < monthNames.length; i++) {
         new_obj[i] = {};
         new_obj[i]["arg"] = monthNames[i];
         new_obj[i]["fruits"] = 0;
         new_obj[i]["vegetables"] = 0;
     }
-    for (var i = 0 ; i < obj.length ; i++) {
-        var index = obj[i]["date"].getMonth();
-        var type = obj[i]["type"];
+    for (let i = 0 ; i < obj.length ; i++) {
+        let index = obj[i]["date"].getMonth();
+        let type = obj[i]["type"];
         new_obj[index][type]++; 
 
     }
     //flatten structure...
-    for (var i = 0 ; i < 12 ; i++) {
+    for (let i = 0 ; i < 12 ; i++) {
         result.push(new_obj[i]);
     }
 

@@ -31,31 +31,31 @@ export function assembleActiveFields(fields) {
     'groupIndex' : [], 'groupName' : []};
 
     let reference = Object.keys(jsonRef1);
-    console.log('reference');
-    console.log(reference);
+    // console.log('reference');
+    // console.log(reference);
     fObj[dimen[0]] = jsonRef1;
     fObj[dimen[1]] = jsonRef2;
     activeDataFields = jsonRef3;
-
+    console.log(fields[3]);
     // console.log('fields in assemble fields');
     // console.log(fields);
     fields.forEach(field => {
-        console.log("each field"); 
-        console.log(field);
+        // console.log("each field"); 
+        // console.log(field);
         // if (field.areaIndex >= 0) {
             if (field.area == "data") {
                 // console.log('print data field');
                 // console.log(field);
 
                 //if (typeof(field[r]) == string);
-                reference.forEach(r => {activeDataFields[r].push(field[r])})
+                reference.forEach(r => {if (field[r] != undefined) activeDataFields[r].push(field[r])})
             }
             //console.log(field); console.log(r); console.log(field[r]); 
             else if (field.area == dimen[0]) {
-                reference.forEach(r => {fObj[dimen[0]][r].push(field[r])})
+                reference.forEach(r => {if (field[r] != undefined) fObj[dimen[0]][r].push(field[r])})
             }
             else if (field.area == dimen[1]) {
-                reference.forEach(r => {fObj[dimen[1]][r].push(field[r])})
+                reference.forEach(r => {if (field[r] != undefined) fObj[dimen[1]][r].push(field[r])})
             }
         // }
     });

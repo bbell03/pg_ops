@@ -13,7 +13,7 @@ let vegetable = ['lettuce', 'kale', 'carrot'];
 let fruit = ['apple', 'strawberry', 'banana'];
 let continents_source = ["Asia", "Africa", "South America", "Europe", "Australia"];
 let continents_target = ["North_America"]
-var keys = ["organic", "type", "name", "date", "price", "source", "target"];
+let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
 
 let _start = new Date('January 1, 1953 03:24:00');
 let _end = new Date('December 31, 1953 04:32:00');
@@ -44,6 +44,9 @@ function JSONFactory(keys) {
     else if (keys[i] == "date") {
         obj[keys[i]] = randomDate(_start, _end);
     }
+    else if (keys[i] == "month") {
+        obj[keys[i]] = obj["date"].getMonth();
+    }
     else if (keys[i] == "organic") {
         obj[keys[i]] = Math.round(Math.random() * 1);
     }
@@ -69,12 +72,17 @@ function JSONFactory(keys) {
 }
 
 export function ArrayGenerator(length) {
-  let json_store = []
+  let json_store = [];
   for (let i = 0; i < length; i++) {
     json_store.push(JSONFactory(keys));
   }
   return json_store;
 }
+
+export function toMonthGroups(time_series) {
+
+}
+
 
 
 export {keys};
