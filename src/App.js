@@ -59,31 +59,31 @@ class App extends React.Component {
       alternateDataFields: false
     });
 
-    let pg_data = this.state.pg1;
-    console.log("pg1")
-    console.log(pg_data);
+    // let pg_data = this.state.pg1;
+    // console.log("pg1")
+    // console.log(pg_data);
 
-    let pg2_data = this.state.pg2;
-    console.log("pg2")
-    console.log(pg2_data);
+    // let pg2_data = this.state.pg2;
+    // console.log("pg2")
+    // console.log(pg2_data);
 
-    let pg3_data = this.state.pg3;
-    console.log("pg3")
-    console.log(pg3_data);
+    // let pg3_data = this.state.pg3;
+    // console.log("pg3")
+    // console.log(pg3_data);
 
-    console.log("pg1 ref.current.instance.getDataSource()")
-    console.log(this.pivotGrid1.current.instance.getDataSource());
+    // console.log("pg1 ref.current.instance.getDataSource()")
+    // console.log(this.pivotGrid1.current.instance.getDataSource());
 
-    console.log("pg2 ref.current.instance.getDataSource()")
-    console.log(this.pivotGrid2.current.instance.getDataSource());
+    // console.log("pg2 ref.current.instance.getDataSource()")
+    // console.log(this.pivotGrid2.current.instance.getDataSource());
 
-    console.log("pg3 ref.current.instance.getDataSource()")
-    console.log(this.pivotGrid3.current.instance.getDataSource());
+    // console.log("pg3 ref.current.instance.getDataSource()")
+    // console.log(this.pivotGrid3.current.instance.getDataSource());
 
-    let columnFieldAreas = this.pivotGrid1.current.instance.getDataSource().getAreaFields('column', true);
-    let rowFieldAreas = this.pivotGrid1.current.instance.getDataSource().getAreaFields('row', true)
-    console.log(columnFieldAreas);
-    console.log(rowFieldAreas);
+    // let columnFieldAreas = this.pivotGrid1.current.instance.getDataSource().getAreaFields('column', true);
+    // let rowFieldAreas = this.pivotGrid1.current.instance.getDataSource().getAreaFields('row', true)
+    // console.log(columnFieldAreas);
+    // console.log(rowFieldAreas);
 
     // let test_diff = dataFactory(this.pivotGrid1.current.instance.getDataSource(),
     //                             this.pivotGrid2.current.instance.getDataSource());
@@ -106,6 +106,7 @@ class App extends React.Component {
 
   render() {
     return (<div>
+      <h2>Pivot Grid Difference</h2>
       <React.Fragment>
         <Chart theme='generic.dark' ref={this.chart}>
           <Size height={200} />
