@@ -59,10 +59,10 @@ function JSONFactory(keys) {
     }
     else if (keys[i] == "price") {
       if (obj["type"] == "vegetables") {
-        obj["price"] = Math.floor((Math.random() + 0.4));
+        obj["price"] = Math.round((Math.random() + 0.4));
       }
       else if (obj["type"] == "fruits") 
-        obj["price"] = Math.floor((Math.random() + 0.6));
+        obj["price"] = Math.round((Math.random() + 0.6));
     }
     else if (keys[i] == "source") {
       obj["source"] = continents_source[Math.floor(Math.random() * continents_source.length)];

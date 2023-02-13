@@ -85,10 +85,10 @@ class App extends React.Component {
     console.log(columnFieldAreas);
     console.log(rowFieldAreas);
 
-    let test_diff = dataFactory(this.pivotGrid1.current.instance.getDataSource(),
-                                this.pivotGrid2.current.instance.getDataSource());
-    console.log("test diff with datafactory");
-    console.log(test_diff);
+    // let test_diff = dataFactory(this.pivotGrid1.current.instance.getDataSource(),
+    //                             this.pivotGrid2.current.instance.getDataSource());
+    // console.log("test diff with datafactory");
+    // console.log(test_diff);
    
     // if (this.state.pg3 != {}) {
     //   console.log("state set");
@@ -397,12 +397,12 @@ const dataSource3 = new PivotGridDataSource({
         let result = [];
 
         //how to organize data for parallelism
-        data1.forEach(function (data, index) {
+        dat3.forEach(function (data, index) {
           // console.log("data: " + data);
           // console.log("index: " + index);
           result.push({
             ...data,
-            price: Math.round(data.price - data2[index].price)
+            price: data.price - dat4[index].price
           });  
         });
 
