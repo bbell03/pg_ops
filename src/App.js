@@ -121,10 +121,10 @@ class App extends React.Component {
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
-          showColumnTotals={false}
-          showColumnGrandTotals={false}
-          showRowTotals={false}
-          showRowGrandTotals={false}
+          showColumnTotals={true}
+          showColumnGrandTotals={true}
+          showRowTotals={true}
+          showRowGrandTotals={true}
           ref={this.pivotGrid1}
         >
           <FieldChooser enabled={true} height={400} />
@@ -137,10 +137,10 @@ class App extends React.Component {
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
-          showColumnTotals={false}
-          showColumnGrandTotals={false}
-          showRowTotals={false}
-          showRowGrandTotals={false}
+          showColumnTotals={true}
+          showColumnGrandTotals={true}
+          showRowTotals={true}
+          showRowGrandTotals={true}
           ref={this.pivotGrid2}
         >
           <FieldChooser enabled={true} height={400} />
@@ -153,10 +153,10 @@ class App extends React.Component {
           allowSortingBySummary={true}
           allowFiltering={true}
           showBorders={true}
-          showColumnTotals={false}
-          showColumnGrandTotals={false}
-          showRowTotals={false}
-          showRowGrandTotals={false}
+          showColumnTotals={true}
+          showColumnGrandTotals={true}
+          showRowTotals={true}
+          showRowGrandTotals={true}
           ref={this.pivotGrid3}
         >
           <FieldChooser enabled={true} height={400} />
@@ -205,7 +205,6 @@ const dataSource = new PivotGridDataSource({
       caption: "Price",
       dataField: "price",
       dataType: "number",
-      format: "currency",
       area: "data",
       summaryType: "sum",
     },
@@ -269,7 +268,6 @@ const dataSource2 = new PivotGridDataSource({
       caption: "Price",
       dataField: "price",
       dataType: "number",
-      format: "currency",
       area: "data",
       summaryType: "sum",
     },
@@ -333,7 +331,6 @@ const dataSource3 = new PivotGridDataSource({
       caption: "Price",
       dataField: "price",
       dataType: "number",
-      format: "currency",
       area: "data",
       summaryType: "sum",
     },
