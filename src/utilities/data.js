@@ -60,7 +60,7 @@ function pg_to_polar(obj) {
 export const types = ['scatter', 'line', 'area', 'bar', 'stackedbar'];
 const data = ArrayGenerator(1000);
 const data2 = ArrayGenerator(1000);
-console.log("data");
+console.log("data1");
 console.log(data);
 console.log("data2");
 console.log(data2);

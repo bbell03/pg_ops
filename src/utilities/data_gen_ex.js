@@ -47,13 +47,13 @@ function JSONFactory(keys) {
     else if (keys[i] == "month") {
         obj[keys[i]] = obj["date"].getMonth();
     }
-    else if (keys[i] == "quarter") {
-        let m = obj["date"].getMonth();
-        if (m < 3) obj[keys[i]] = 0
-        else if (m >= 3 && m < 6) obj[keys[i]] = 1
-        else if (m >= 6 && m < 9) obj[keys[i]] = 2
-        else if (m >= 9 && m < 12) obj[keys[i]] = 3
-    }
+    // else if (keys[i] == "quarter") {
+    //     let m = obj["date"].getMonth();
+    //     if (m < 3) obj[keys[i]] = 0
+    //     else if (m >= 3 && m < 6) obj[keys[i]] = 1
+    //     else if (m >= 6 && m < 9) obj[keys[i]] = 2
+    //     else if (m >= 9 && m < 12) obj[keys[i]] = 3
+    // }
     else if (keys[i] == "organic") {
         obj[keys[i]] = Math.round(Math.random() * 1);
     }

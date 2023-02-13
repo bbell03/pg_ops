@@ -415,7 +415,7 @@ const dataSource3 = new PivotGridDataSource({
 let types = ['fruits', 'vegetables'];
 let vegetable = ['lettuce', 'kale', 'carrot'];
 let fruit = ['apple', 'banana', 'strawberry'];
-let keys = ["organic", "type", "name", "date", "month", "quarter", "price", "source", "target"];
+let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
 //fruits: 0, 1, 2, vegetables: 3, 4, 5
 //test using dev extreme data filters data layer docs
 function groupDatByMonth(data) {
@@ -446,8 +446,8 @@ function groupDatByMonth(data) {
         months[d.month][k][key] = d[key];
       if (key == "price")
         months[d.month][k][key] += d[key];
-      else if (key == "quarter")
-        months[d.month][k][key] = d[key];
+      // else if (key == "quarter")
+      //   months[d.month][k][key] = d[key];
       else {
         if (months[d.month][k][key].length == 0) months[d.month][k][key] = d[key];
       }
