@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.pivotGrid1.current.instance.bindChart(this.chart.current.instance, {
+    this.pivotGrid3.current.instance.bindChart(this.chart.current.instance, {
       dataFieldsDisplayMode: "splitPanes",
       alternateDataFields: false
     });
