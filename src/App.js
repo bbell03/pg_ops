@@ -373,16 +373,26 @@ const dataSource3 = new PivotGridDataSource({
       
 
         var data1 = await ds1.load();
-        console.log("data1: " + JSON.stringify(data1));
+        console.log("data1: ");
+        console.log(data1);
 
         // console.log("data1");
         // console.log(data1);
         let data2 = await ds2.load();
-        // console.log("data2: " + JSON.stringify(data2));
+        console.log("data2: " )
+        console.log(data2);
 
         // let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
-        console.log(makeObj(keys));
-        console.log(groupDatByMonth(data1));
+
+        let dat3 = groupDatByMonth(data1);
+        dat3 = dat3.flat();
+        console.log("dat1 grouped and flattened");
+        console.log(dat3);
+
+        let dat4 = groupDatByMonth(data2);
+        dat4 = dat4.flat();
+        console.log("dat2 grouped and flattened");
+        console.log(dat4);
 
         let result = [];
 
@@ -407,7 +417,7 @@ const dataSource3 = new PivotGridDataSource({
 let types = ['fruits', 'vegetables'];
 let vegetable = ['lettuce', 'kale', 'carrot'];
 let fruit = ['apple', 'banana', 'strawberry'];
-let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
+let keys = ["organic", "type", "name", "date", "month", "quarter", "price", "source", "target"];
 //fruits: 0, 1, 2, vegetables: 3, 4, 5
 //test using dev extreme data filters data layer docs
 function groupDatByMonth(data) {
@@ -428,7 +438,8 @@ function groupDatByMonth(data) {
   data.forEach(d => {
     //handle organic later
     months[d.month]["organic"] = d["organic"];
-    let k = (d.type == fruit) ? (fruit.indexOf(d.name)) : (3 + vegetable.indexOf(d.name));
+    let k = (d.type == "fruits") ? (fruit.indexOf(d.name)) : (3 + vegetable.indexOf(d.name));
+    if (d.organic == 1) k+=6
     //type specifier for fruit 
     
     //type specifier for vegetables
@@ -437,6 +448,8 @@ function groupDatByMonth(data) {
         months[d.month][k][key] = d[key];
       if (key == "price")
         months[d.month][k][key] += d[key];
+      else if (key == "quarter")
+        months[d.month][k][key] = d[key];
       else {
         if (months[d.month][k][key].length == 0) months[d.month][k][key] = d[key];
       }
@@ -454,7 +467,7 @@ function groupDatByMonth(data) {
 function makeObj(keys) {
   let object = {}
   for (let i = 0; i < keys.length; i++) {
-    if (keys[i] == "organic" || keys[i] == "price") object[keys[i]] = 0;
+    if (keys[i] == "organic" || keys[i] == "price" || keys[i] == "quarter") object[keys[i]] = 0;
     else object[keys[i]] = "";
   }
   return object

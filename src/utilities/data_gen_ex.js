@@ -13,7 +13,7 @@ let vegetable = ['lettuce', 'kale', 'carrot'];
 let fruit = ['apple', 'banana', 'strawberry'];
 let continents_source = ["Asia", "Africa", "South America", "Europe", "Australia"];
 let continents_target = ["North_America"]
-let keys = ["organic", "type", "name", "date", "month", "price", "source", "target"];
+let keys = ["organic", "type", "name", "date", "month", "quarter", "price", "source", "target"];
 
 let _start = new Date('January 1, 1953 03:24:00');
 let _end = new Date('December 31, 1953 04:32:00');
@@ -47,15 +47,22 @@ function JSONFactory(keys) {
     else if (keys[i] == "month") {
         obj[keys[i]] = obj["date"].getMonth();
     }
+    else if (keys[i] == "quarter") {
+        let m = obj["date"].getMonth();
+        if (m < 3) obj[keys[i]] = 0
+        else if (m >= 3 && m < 6) obj[keys[i]] = 1
+        else if (m >= 6 && m < 9) obj[keys[i]] = 2
+        else if (m >= 9 && m < 12) obj[keys[i]] = 3
+    }
     else if (keys[i] == "organic") {
         obj[keys[i]] = Math.round(Math.random() * 1);
     }
     else if (keys[i] == "price") {
       if (obj["type"] == "vegetables") {
-        obj["price"] = (Math.random() + 0.4);
+        obj["price"] = Math.floor((Math.random() + 0.4));
       }
       else if (obj["type"] == "fruits") 
-        obj["price"] = (Math.random() + 0.6);
+        obj["price"] = Math.floor((Math.random() + 0.6));
     }
     else if (keys[i] == "source") {
       obj["source"] = continents_source[Math.floor(Math.random() * continents_source.length)];
